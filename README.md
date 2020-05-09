@@ -180,13 +180,6 @@ GROUP BY stars
 +-------+-------+
 
 7. Find the top 3 users based on their total number of reviews:
-+-----------+------------------------+--------------+
-| name      | id                     | review_count |
-+-----------+------------------------+--------------+
-| Gerald    | -G7Zkl1wIWBBmD0KRy_sCw |         2000 |
-| Sara      | -3s52C4zL_DHRK0ULG6qtg |         1629 |
-| Yuri      | -8lbUNlXVSoXqaRRiHiSNg |         1339 |
-+-----------+------------------------+--------------+
 SQL code used to arrive at answer:
 SELECT u.name, u.id, u.review_count
 FROM user u
@@ -292,7 +285,8 @@ where text like '%hate%';
 
 10. Find the top 10 users with the most fans:
 SQL code used to arrive at answer:
-Copy and Paste the Result Below:
+
+
 Part 2: Inferences and Analysis
 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.
 i. Do the two groups you chose to analyze have a different distribution of hours?
