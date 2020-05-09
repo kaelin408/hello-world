@@ -18,12 +18,11 @@ x. tip table = 10,000
 xi. user table = 10,000 
 
 SELECT COUNT(*)
-		FROM table
-    
+FROM table    
 2. Find the total distinct records by either the foreign key or primary key for each table. If two foreign keys are listed in the table, please specify which foreign key.
 
 SELECT COUNT(DISTINCT(key))
-		FROM table
+FROM table
     
 i. Business =10,000
 ii. Hours =1562
@@ -89,15 +88,25 @@ from review;
 |          1 |          5 |     3.7082 |
     
 i. Table: Review, Column: Stars
-min:1	 max:5		avg:3.7082
+min:1	 
+max:5	 
+avg:3.7082
 ii. Table: Business, Column: Stars
-min:1		max:5		avg:3.6549
+min:1	
+max:5	
+avg:3.6549
 iii. Table: Tip, Column: Likes
-min:0		max:2		avg:0.0144
+min:0	
+max:2	
+avg:0.0144
 iv. Table: Checkin, Column: Count
-min:1		max:53		avg:1.9414
+min:1	
+max:53		
+avg:1.9414
 v. Table: User, Column: Review_count
-min:0		max:2000		avg:24.2995
+min:0	
+max:2000	
+avg:24.2995
 
 5. List the cities with the most reviews in descending order:
 SQL code used to arrive at answer:
@@ -105,7 +114,7 @@ SELECT city,SUM(review_count) AS reviews
 FROM business
 GROUP BY city
 ORDER BY NUM DESC
-+-----------------+---------+
+                +-----------------+---------+
 		| city            | reviews |
 		+-----------------+---------+
 		| Las Vegas       |   82854 |
@@ -171,13 +180,116 @@ GROUP BY stars
 +-------+-------+
 
 7. Find the top 3 users based on their total number of reviews:
++-----------+------------------------+--------------+
+| name      | id                     | review_count |
++-----------+------------------------+--------------+
+| Gerald    | -G7Zkl1wIWBBmD0KRy_sCw |         2000 |
+| Sara      | -3s52C4zL_DHRK0ULG6qtg |         1629 |
+| Yuri      | -8lbUNlXVSoXqaRRiHiSNg |         1339 |
++-----------+------------------------+--------------+
 SQL code used to arrive at answer:
-Copy and Paste the Result Below:
+SELECT u.name, u.id, u.review_count
+FROM user u
+GROUP BY u.review_count
+GROUP BY u.review_count
++-----------+------------------------+--------------+
+| name      | id                     | review_count |
++-----------+------------------------+--------------+
+| Gerald    | -G7Zkl1wIWBBmD0KRy_sCw |         2000 |
+| Sara      | -3s52C4zL_DHRK0ULG6qtg |         1629 |
+| Yuri      | -8lbUNlXVSoXqaRRiHiSNg |         1339 |
+| .Hon      | -K2Tcgh2EKX6e6HqqIrBIQ |         1246 |
+| William   | -FZBTkAZEXoP7CYvRV2ZwQ |         1215 |
+| Harald    | --2vR0DIsmQ6WfcSzKWigw |         1153 |
+| eric      | -gokwePdbXjfS0iF7NsUGA |         1116 |
+| Roanna    | -DFCC64NXgqrxlO8aLU5rg |         1039 |
+| Mimi      | -8EnCioUmDygAbsYZmTeRQ |          968 |
+| Christine | -0IiMAZI2SsQ7VmyzJjokQ |          930 |
+| Ed        | -fUARDNuXAfrOn4WLSZLgA |          904 |
+| Nicole    | -hKniZN2OdshWLHYuj21jQ |          864 |
+| Fran      | -9da1xk7zgnnfO1uTVYGkA |          862 |
+| Mark      | -B-QEUESGWHPE_889WJaeg |          861 |
+| Christina | -kLVfaJytOJY2-QdQoCcNQ |          842 |
+| Dominic   | -kO6984fXByyZm3_6z2JYg |          836 |
+| Lissa     | -lh59ko3dxChBSZ9U7LfUw |          834 |
+| Lisa      | -g3XIcCb2b-BD0QBCcq2Sw |          813 |
+| Alison    | -l9giG8TSDBG1jnUBUXp5w |          775 |
+| Sui       | -dw8f7FLaUmWR7bfJ_Yf0w |          754 |
+| Tim       | -AaBjWJYiQxXkCMDlXfPGw |          702 |
+| L         | -jt1ACMiZljnBFvS6RRvnA |          696 |
+| Angela    | -IgKkE8JvYNWeGu8ze4P8Q |          694 |
+| Crissy    | -hxUwfo3cMnLTv-CAaP69A |          676 |
+| Lyn       | -H6cTbVxeIRYR-atxdielQ |          675 |
++-----------+------------------------+--------------+
+(Output limit exceeded, 25 of 367 total rows shown)	
+
 8. Does posing more reviews correlate with more fans?
 Please explain your findings and interpretation of the results:
+SELECT id,
+name,
+review_count,
+fans,
+yelping_since
+FROM user
+ORDER BY fans DESC
+                +------------------------+-----------+--------------+------+---------------------+
+		| id                     | name      | review_count | fans | yelping_since       |
+		+------------------------+-----------+--------------+------+---------------------+
+		| -9I98YbNQnLdAmcYfb324Q | Amy       |          609 |  503 | 2007-07-19 00:00:00 |
+		| -8EnCioUmDygAbsYZmTeRQ | Mimi      |          968 |  497 | 2011-03-30 00:00:00 |
+		| --2vR0DIsmQ6WfcSzKWigw | Harald    |         1153 |  311 | 2012-11-27 00:00:00 |
+		| -G7Zkl1wIWBBmD0KRy_sCw | Gerald    |         2000 |  253 | 2012-12-16 00:00:00 |
+		| -0IiMAZI2SsQ7VmyzJjokQ | Christine |          930 |  173 | 2009-07-08 00:00:00 |
+		| -g3XIcCb2b-BD0QBCcq2Sw | Lisa      |          813 |  159 | 2009-10-05 00:00:00 |
+		| -9bbDysuiWeo2VShFJJtcw | Cat       |          377 |  133 | 2009-02-05 00:00:00 |
+		| -FZBTkAZEXoP7CYvRV2ZwQ | William   |         1215 |  126 | 2015-02-19 00:00:00 |
+		| -9da1xk7zgnnfO1uTVYGkA | Fran      |          862 |  124 | 2012-04-05 00:00:00 |
+		| -lh59ko3dxChBSZ9U7LfUw | Lissa     |          834 |  120 | 2007-08-14 00:00:00 |
+		| -B-QEUESGWHPE_889WJaeg | Mark      |          861 |  115 | 2009-05-31 00:00:00 |
+		| -DmqnhW4Omr3YhmnigaqHg | Tiffany   |          408 |  111 | 2008-10-28 00:00:00 |
+		| -cv9PPT7IHux7XUc9dOpkg | bernice   |          255 |  105 | 2007-08-29 00:00:00 |
+		| -DFCC64NXgqrxlO8aLU5rg | Roanna    |         1039 |  104 | 2006-03-28 00:00:00 |
+		| -IgKkE8JvYNWeGu8ze4P8Q | Angela    |          694 |  101 | 2010-10-01 00:00:00 |
+		| -K2Tcgh2EKX6e6HqqIrBIQ | .Hon      |         1246 |  101 | 2006-07-19 00:00:00 |
+		| -4viTt9UC44lWCFJwleMNQ | Ben       |          307 |   96 | 2007-03-10 00:00:00 |
+		| -3i9bhfvrM3F1wsC9XIB8g | Linda     |          584 |   89 | 2005-08-07 00:00:00 |
+		| -kLVfaJytOJY2-QdQoCcNQ | Christina |          842 |   85 | 2012-10-08 00:00:00 |
+		| -ePh4Prox7ZXnEBNGKyUEA | Jessica   |          220 |   84 | 2009-01-12 00:00:00 |
+		| -4BEUkLvHQntN6qPfKJP2w | Greg      |          408 |   81 | 2008-02-16 00:00:00 |
+		| -C-l8EHSLXtZZVfUAUhsPA | Nieves    |          178 |   80 | 2013-07-08 00:00:00 |
+		| -dw8f7FLaUmWR7bfJ_Yf0w | Sui       |          754 |   78 | 2009-09-07 00:00:00 |
+		| -8lbUNlXVSoXqaRRiHiSNg | Yuri      |         1339 |   76 | 2008-01-03 00:00:00 |
+		| -0zEEaDFIjABtPQni0XlHA | Nicole    |          161 |   73 | 2009-04-30 00:00:00 |
+		+------------------------+-----------+--------------+------+---------------------+
+the correlation between review count and number of fans can be positive were both values intercet at a key point. or negative
+where both values are moving in opposed directions like the concept of supply and demand.
+the resion for this inconsistency depends on a number of factors, such as the time they been yelping,and the general intereste the public is in there review.
+
 9. Are there more reviews with the word "love" or with the word "hate" in them?
-Answer:
+Answer: 
+love=1780
+hate=232
 SQL code used to arrive at answer:
+select
+count (*)
+from review
+where text like '%love%';
++-----------+
+| count (*) |
++-----------+
+|      1780 |
++-----------+
+
+select
+count (*)
+from review
+where text like '%hate%';
++-----------+
+| count (*) |
++-----------+
+|       232 |
++-----------+
+
 10. Find the top 10 users with the most fans:
 SQL code used to arrive at answer:
 Copy and Paste the Result Below:
