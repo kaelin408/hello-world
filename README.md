@@ -18,7 +18,8 @@ x. tip table = 10,000
 xi. user table = 10,000 
 
 SELECT COUNT(*)
-FROM table    
+FROM table   
+
 2. Find the total distinct records by either the foreign key or primary key for each table. If two foreign keys are listed in the table, please specify which foreign key.
 
 SELECT COUNT(DISTINCT(key))
@@ -285,11 +286,73 @@ where text like '%hate%';
 
 10. Find the top 10 users with the most fans:
 SQL code used to arrive at answer:
+select
+name
+, id
+, fans
+from user
+order by fans desc;
++-----------+------------------------+------+
+| name      | id                     | fans |
++-----------+------------------------+------+
+| Amy       | -9I98YbNQnLdAmcYfb324Q |  503 |
+| Mimi      | -8EnCioUmDygAbsYZmTeRQ |  497 |
+| Harald    | --2vR0DIsmQ6WfcSzKWigw |  311 |
+| Gerald    | -G7Zkl1wIWBBmD0KRy_sCw |  253 |
+| Christine | -0IiMAZI2SsQ7VmyzJjokQ |  173 |
+| Lisa      | -g3XIcCb2b-BD0QBCcq2Sw |  159 |
+| Cat       | -9bbDysuiWeo2VShFJJtcw |  133 |
+| William   | -FZBTkAZEXoP7CYvRV2ZwQ |  126 |
+| Fran      | -9da1xk7zgnnfO1uTVYGkA |  124 |
+| Lissa     | -lh59ko3dxChBSZ9U7LfUw |  120 |
 
+11.Is there a strong relationship (or correlation) between having a high number of fans and being listed as "useful" or"funny?" Out of the top 10 users with the highest number offans, what percent are also listed as “useful” or “funny”?
+SQL code used to arrive at answer
+select
+select
+, id
+, fans
+, useful
+, funny
+from user
+order by fans desc;
++-----------+------------------------+------+--------+--------+
+| name      | id                     | fans | useful |  funny |
++-----------+------------------------+------+--------+--------+
+| Amy       | -9I98YbNQnLdAmcYfb324Q |  503 |   3226 |   2554 |
+| Mimi      | -8EnCioUmDygAbsYZmTeRQ |  497 |    257 |    138 |
+| Harald    | --2vR0DIsmQ6WfcSzKWigw |  311 | 122921 | 122419 |
+| Gerald    | -G7Zkl1wIWBBmD0KRy_sCw |  253 |  17524 |   2324 |
+| Christine | -0IiMAZI2SsQ7VmyzJjokQ |  173 |   4834 |   6646 |
+| Lisa      | -g3XIcCb2b-BD0QBCcq2Sw |  159 |     48 |     13 |
+| Cat       | -9bbDysuiWeo2VShFJJtcw |  133 |   1062 |    672 |
+| William   | -FZBTkAZEXoP7CYvRV2ZwQ |  126 |   9363 |   9361 |
+| Fran      | -9da1xk7zgnnfO1uTVYGkA |  124 |   9851 |   7606 |
+| Lissa     | -lh59ko3dxChBSZ9U7LfUw |  120 |    455 |    150 |
+| Mark      | -B-QEUESGWHPE_889WJaeg |  115 |   4008 |    570 |
+| Tiffany   | -DmqnhW4Omr3YhmnigaqHg |  111 |   1366 |    984 |
+| bernice   | -cv9PPT7IHux7XUc9dOpkg |  105 |    120 |    112 |
+| Roanna    | -DFCC64NXgqrxlO8aLU5rg |  104 |   2995 |   1188 |
+| Angela    | -IgKkE8JvYNWeGu8ze4P8Q |  101 |    158 |    164 |
+| .Hon      | -K2Tcgh2EKX6e6HqqIrBIQ |  101 |   7850 |   5851 |
+| Ben       | -4viTt9UC44lWCFJwleMNQ |   96 |   1180 |   1155 |
+| Linda     | -3i9bhfvrM3F1wsC9XIB8g |   89 |   3177 |   2736 |
+| Christina | -kLVfaJytOJY2-QdQoCcNQ |   85 |    158 |     34 |
+| Jessica   | -ePh4Prox7ZXnEBNGKyUEA |   84 |   2161 |   2091 |
+| Greg      | -4BEUkLvHQntN6qPfKJP2w |   81 |    820 |    753 |
+| Nieves    | -C-l8EHSLXtZZVfUAUhsPA |   80 |   1091 |    774 |
+| Sui       | -dw8f7FLaUmWR7bfJ_Yf0w |   78 |      9 |     18 |
+| Yuri      | -8lbUNlXVSoXqaRRiHiSNg |   76 |   1166 |    220 |
+| Nicole    | -0zEEaDFIjABtPQni0XlHA |   73 |     13 |     10 |
++-----------+------------------------+------+--------+--------+
+(Output limit exceeded, 25 of 10000 total rows shown)
+based on the results of the data there is a correlation between the number of fans to the number of  “useful” or “funny” but thats for some of the data. if you countinue down the chart you start to see negative correlation, wehere one variable increases and the other variable decrease. thus in total there in no true correlation 
 
 Part 2: Inferences and Analysis
 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.
+
 i. Do the two groups you chose to analyze have a different distribution of hours?
+
 ii. Do the two groups you chose to analyze have a different number of reviews?
 iii. Are you able to infer anything from the location data provided between these two groups? Explain.
 SQL code used for analysis:
