@@ -350,19 +350,99 @@ based on the results of the data there is a correlation between the number of fa
 
 Part 2: Inferences and Analysis
 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.
+City: Las vegas      Category: Food 
 
 i. Do the two groups you chose to analyze have a different distribution of hours?
+yes, the number of hours are a factor  
 
 ii. Do the two groups you chose to analyze have a different number of reviews?
+yes, the location is a factor
+
 iii. Are you able to infer anything from the location data provided between these two groups? Explain.
+there appears to be
+the amount of reviews and ratings are controled by two factors. one is location, if individuals have an easy acses to visit and eat there more likly to come back thus there able to try more food. In addition the amount of working hours that the restruant is open to the public allows more time for the indivedual to enyoy the food. thus resturants with longer working hours usually have higher rating in comparision to thoes that mave shorter longer working
+
 SQL code used for analysis:
+select
+business.name
+,business.city
+,category.category
+,business.stars
+,hours.hours
+,business.review_count
+,business.postal_code
+from (business inner join category on business.id = category.business_id)
+inner join hours on hours.business_id = category.business_id
+where business.city = 'Las vegas' 
+ group by business.stars;
+
 2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? List at least two differences and the SQL code you used to arrive at your answer.
+
 i. Difference 1:
+The resturant that are still open have higher rating & have more reviews
+
 ii. Difference 2:
+The resturant that are still open have longer working hours
+
 SQL code used for analysis:
+select
+business.name
+,business.is_open
+,category.category
+,business.stars
+,hours.hours
+,business.review_count
+,business.postal_code
+from (business inner join category on business.id = category.business_id)
+inner join hours on hours.business_id = category.business_id
+where business.city = 'Las vegas' 
+group by business.is_open;
+
 3. For this last part of your analysis, you are going to choose the type of analysis you want to conduct on the Yelp dataset and are going to prepare the data for analysis.
 Ideas for analysis include: Parsing out keywords and business attributes for sentiment analysis, clustering businesses to find commonalities or anomalies between them, predicting the overall star rating for a business, predicting the number of fans a user will have, and so on. These are just a few examples to get you started, so feel free to be creative and come up with your own problem you want to solve. Provide answers, in-line, to all of the following:
+
 i. Indicate the type of analysis you chose to do:
+reserching the correlation between the amount of likes in concederation with the amount of stares
+
 ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:
+find the word 'like' in number of reviews in corespondence to the given rates amonge data. thus to complete the data I need to two sources of data that draws information from the amount of users in responce to business. to determin the correlation between 'likes' & 'stars'
+
 iii. Output of your finished dataset:
++-------+-------+
+| stars | likes |
++-------+-------+
+|     3 |     2 |
+|     5 |     2 |
+|     5 |     1 |
+|     5 |     1 |
+|     5 |     1 |
+|     5 |     1 |
+|     5 |     1 |
+|     5 |     1 |
+|     5 |     1 |
+|     5 |     1 |
+|     3 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
+|     4 |     1 |
++-------+-------+
+(Output limit exceeded, 25 of 1227 total rows shown)
+
 iv. Provide the SQL code you used to create your final dataset:
+select
+review.stars
+,tip.likes
+from review
+inner join tip on review.user_id = tip.user_id
+order by tip.likes desc;
